@@ -1,9 +1,7 @@
 package com.wsj.wx.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -15,11 +13,17 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/auth")
+@Slf4j
 public class AuthController {
 
     @GetMapping
-    public String auth(@RequestBody Map map){
-        System.out.println(11122);
+    public String auth(@RequestParam(required = false) Map map){
+        log.info("认证");
         return map.get("echostr").toString();
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "测试接口";
     }
 }
