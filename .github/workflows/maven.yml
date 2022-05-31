@@ -22,7 +22,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: |
+        mvn -B package --file pom.xml
+        pwd
   push-docker:
     needs: build
     runs-on: ubuntu-latest
@@ -46,10 +48,6 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v3
       with:
-        script: |
-          pwd
-          echo "wsj"
-        context: .
         push: true
-        tags: 1838039390/wx:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/wx:latest
     
