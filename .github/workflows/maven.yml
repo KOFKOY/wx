@@ -8,7 +8,7 @@ on:
     branches: master
 defaults:
   run:
-    working-directory: /home/runner/work/wx/
+    working-directory: /home/runner/work/wx/wx
     
 jobs:
   build:
@@ -48,7 +48,7 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v3
       with:
-        context: /home/runner/work/wx/
+        context: /home/runner/work/wx/wx
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/wx:latest
     
