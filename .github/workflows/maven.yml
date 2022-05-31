@@ -43,7 +43,9 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v3
       with:
-        script: pwd
+        script: |
+          pwd
+          echo "wsj"
         context: .
         push: true
         tags: user/app:latest
