@@ -48,5 +48,5 @@ jobs:
           echo "wsj"
         context: .
         push: true
-        tags: user/app:latest
+        tags: 1838039390/wx:latest
     
