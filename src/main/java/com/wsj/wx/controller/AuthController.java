@@ -24,6 +24,6 @@ public class AuthController {
 
     @GetMapping("/test")
     public String test(){
-        return "测试接口";
+        return "测试接口Github Actions";
     }
 }
