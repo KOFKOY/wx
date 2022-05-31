@@ -6,7 +6,10 @@ name: Java CI with Maven
 on:
   push:
     branches: master
-
+defaults:
+  run:
+    working-directory: ./wx
+    
 jobs:
   build:
     runs-on: ubuntu-latest
