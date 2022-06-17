@@ -35,15 +35,15 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/wx:latest
-    - name: SSH REMOTE
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST}}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: |
-          cd /home/wxserver
-          sh run.sh
+#    - name: SSH REMOTE
+#      uses: appleboy/ssh-action@master
+#      with:
+#        host: ${{ secrets.HOST}}
+#        username: ${{ secrets.SSH_USERNAME }}
+#        password: ${{ secrets.SSH_PASSWORD }}
+#        port: ${{ secrets.PORT }}
+#        script: |
+#          cd /home/wxserver
+#          sh run.sh
         
     
