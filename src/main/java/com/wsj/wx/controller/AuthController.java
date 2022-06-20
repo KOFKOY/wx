@@ -32,6 +32,10 @@ public class AuthController {
     @PostMapping(consumes = {MediaType.TEXT_XML_VALUE},produces = {MediaType.TEXT_XML_VALUE})
     public WxMessage post(@RequestBody WxMessage message){
         log.info("post接口调用");
+        String fromUserName = message.getFromUserName();
+        String toUserName = message.getToUserName();
+        message.setFromUserName(toUserName);
+        message.setToUserName(fromUserName);
         message.setContent(message.getFromUserName() + " hello world");
         log.info(message.toString());
         return message;
