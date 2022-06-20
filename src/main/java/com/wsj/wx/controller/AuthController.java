@@ -1,6 +1,8 @@
 package com.wsj.wx.controller;
 
+import com.wsj.wx.vo.WxMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -27,12 +29,11 @@ public class AuthController {
         return "测试接口Github Actions";
     }
 
-    @PostMapping
-    public String post(@RequestBody(required = false) HashMap map){
+    @PostMapping(consumes = {MediaType.TEXT_XML_VALUE},produces = {MediaType.TEXT_XML_VALUE})
+    public WxMessage post(@RequestBody WxMessage message){
         log.info("post接口调用");
-        map.keySet().stream().forEach(key -> {
-            log.info("key:{},value:{}",key,map.get(key));
-        });
-        return "接口调用";
+        message.setContent(message.getFromUserName() + " hello world");
+        log.info(message.toString());
+        return message;
     }
 }
