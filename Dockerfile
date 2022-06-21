@@ -12,4 +12,4 @@ RUN rm -f /etc/localtime \
 ADD ./target/wx.jar /app/app.jar
 # 指定docker容器启动时运行jar包
 EXPOSE 80
-ENTRYPOINT ["java", "-jar","app/app.jar"]
+ENTRYPOINT ["java", "-Dfile.encoding=UTF-8","-Dsun.jnu.encoding=UTF-8","-jar","app/app.jar"]
