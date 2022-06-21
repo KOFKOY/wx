@@ -64,6 +64,7 @@ public class AuthController {
             message.setContent(null);
             message.setMsgId("1234567890123456");
             message.setPicUrl("https://code-thinking-1253855093.file.myqcloud.com/pics/20211111115823.png");
+            log.info(message.toString());
             return message;
         }
         message.setContent("未知命令,查看帮助请输入ls或list或列表");
