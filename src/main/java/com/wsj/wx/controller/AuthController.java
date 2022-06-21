@@ -41,20 +41,28 @@ public class AuthController {
 
     @PostMapping(consumes = {MediaType.TEXT_XML_VALUE},produces = {MediaType.TEXT_XML_VALUE})
     public WxMessage post(@RequestBody WxMessage message){
-        log.info("post接口调用");
+        log.info("post请求");
         String fromUserName = message.getFromUserName();
         String toUserName = message.getToUserName();
         message.setFromUserName(toUserName);
         message.setToUserName(fromUserName);
         String content = message.getContent();
         if (content.equals("ls") || content.equals("list") || content.equals("列表")) {
-            message.setContent("由于个人公众号不能认证，无法定义菜单\n#VPN\n#每日笑话");
+            message.setContent("由于个人公众号不能认证，无法定义菜单\n#VPN\n#每日笑话\n#图片\n#体验");
             return message;
         }else if(content.equals("VPN") || content.equals("vpn")) {
             message.setContent(getVpn());
             return message;
         }else if(content.equals("每日笑话") || content.equals("笑话")) {
             message.setContent(getJoker());
+            return message;
+        } else if (content.equals("体验")) {
+            message.setContent("账号：wsj\n密码：123456\n地址：http://www.wsjcm.top");
+            return message;
+        }else if(content.equals("图片") || content.equals("image")) {
+            message.setMsgType("image");
+            message.setContent(null);
+            message.setPicUrl("https://code-thinking-1253855093.file.myqcloud.com/pics/20211111115823.png");
             return message;
         }
         message.setContent("未知命令,查看帮助请输入ls或list或列表");
@@ -63,20 +71,21 @@ public class AuthController {
 
     private String getVpn() {
         String url ="https://ekey.zielsmart.com/ekey/feishu-random-code";
-        String test = "600417019\n" +
-                "600417024\n" +
-                "600416435\n" +
-                "600416460\n" +
-                "600445520\n" +
-                "602205939\n" +
-                "600495824";
+        String test = "601184607\n" +
+                "600797996\n" +
+                "600279802\n" +
+                "600280145\n" +
+                "600719088\n" +
+                "600279855\n" +
+                "600621983";
         Map<String,String> map = new HashMap<>();
-        map.put("600417019","61451");
-        map.put("600417024","61452");
-        map.put("600416435","61453");
-        map.put("600416460","61454");
-        map.put("600495824","61549");
-        map.put("602205939","62242");
+        map.put("601184607","62019");
+        map.put("600797996","61835");
+        map.put("600279802","61385");
+        map.put("600280145","60281");
+        map.put("600719088","61761");
+        map.put("600279855","60759");
+        map.put("600621983","61811");
         String[] split = test.split("\n");
         //获取随机数
         int random = ThreadLocalRandom.current().nextInt(0, split.length);
@@ -94,7 +103,7 @@ public class AuthController {
             return "获取失败，此用户已失效 请重新获取";
         }else{
             String code = map.get(feishuId);
-            return code + "\n"+body.getOrDefault("data","获取密码失败 " + body.get("message")).toString();
+            return code + "\t\t"+body.getOrDefault("data","获取密码失败 " + body.get("message")).toString();
         }
     }
 

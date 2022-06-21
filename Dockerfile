@@ -1,6 +1,9 @@
 # 该镜像需要依赖的基础镜像
 FROM livingobjects/jre8
 MAINTAINER wsj
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV LANGUAGE en_US:en
 # 调整时区
 RUN rm -f /etc/localtime \
 && ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
