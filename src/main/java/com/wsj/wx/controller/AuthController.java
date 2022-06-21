@@ -48,7 +48,7 @@ public class AuthController {
         message.setToUserName(fromUserName);
         String content = message.getContent();
         if (content.equals("ls") || content.equals("list") || content.equals("列表")) {
-            message.setContent("由于个人公众号不能认证，无法定义菜单\n#VPN\n#每日笑话\n#图片\n#体验");
+            message.setContent("由于个人公众号不能认证，无法定义菜单\n#VPN\n#每日笑话\n#体验");
             return message;
         }else if(content.equals("VPN") || content.equals("vpn")) {
             message.setContent(getVpn());
@@ -62,6 +62,7 @@ public class AuthController {
         }else if(content.equals("图片") || content.equals("image")) {
             message.setMsgType("image");
             message.setContent(null);
+            message.setMsgId("1234567890123456");
             message.setPicUrl("https://code-thinking-1253855093.file.myqcloud.com/pics/20211111115823.png");
             return message;
         }

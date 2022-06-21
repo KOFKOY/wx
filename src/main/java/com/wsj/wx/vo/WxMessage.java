@@ -25,4 +25,6 @@ public class WxMessage {
     private String content;
     @JacksonXmlProperty(localName = "PicUrl")
     private String picUrl;
+    @JacksonXmlProperty(localName = "MsgId")
+    private String msgId;
 }
