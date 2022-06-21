@@ -36,7 +36,7 @@ public class AuthController {
 
     @GetMapping("/test")
     public String test(){
-        return "测试接口Github Actions";
+        return "测试接口 Github Actions";
     }
 
     @PostMapping(consumes = {MediaType.TEXT_XML_VALUE},produces = {MediaType.TEXT_XML_VALUE})
@@ -48,7 +48,7 @@ public class AuthController {
         message.setToUserName(fromUserName);
         String content = message.getContent();
         if (content.equals("ls") || content.equals("list") || content.equals("列表")) {
-            message.setContent("由于个人公众号不能认证，无法定义菜单\n#VPN\n#每日笑话\n#体验");
+            message.setContent("由于个人公众号不能认证，无法定义菜单\n#VPN\n#体验\n#养生\n#干饭\n#每日笑话\n#每日一句");
             return message;
         }else if(content.equals("VPN") || content.equals("vpn")) {
             message.setContent(getVpn());
@@ -59,12 +59,28 @@ public class AuthController {
         } else if (content.equals("体验")) {
             message.setContent("账号：wsj\n密码：123456\n地址：http://www.wsjcm.top");
             return message;
-        }else if(content.equals("图片") || content.equals("image")) {
-            message.setMsgType("image");
-            message.setContent(null);
-            message.setMsgId("1234567890123456");
-            message.setPicUrl("https://code-thinking-1253855093.file.myqcloud.com/pics/20211111115823.png");
-            log.info(message.toString());
+        }else if(content.equals("养生")) {
+            message.setContent("涌泉穴：每天睡前热水洗脚后按压\n" +
+                    "关元穴：仰卧，拇指点按一分钟，每日或隔日\n" +
+                    "肾俞穴：双手拇指均匀按揉，每次2-3分钟早晚各一次\n" +
+                    "三阴交穴：坐姿或卧姿，右腿竖起，右手拇指按摩右腿，慢慢按压，7秒后慢慢松开，十五次后按压左腿\n" +
+                    "命门穴：俯卧，双手大拇指反复按压，每次3-5分钟后交换双手按压，早晚各一次\n" +
+                    "太溪穴：对侧手拇指按揉五分钟，17-19点效果最好，力度要按出酸胀加麻麻的感觉，两手握拳，手臂往后，两拇指掌关节突出部位按摩腰眼，向内做环形旋转按摩，逐渐用力，持续十分钟，早中晚各一次");
+            return message;
+        }
+        else if(content.equals("干饭")) {
+            message.setContent("一斤半鸡腿\n" +
+                    "蚝油20g（李锦记）\n" +
+                    "海鲜酱25g（海天）\n" +
+                    "排骨酱15g（李锦记）\n" +
+                    "鲍鱼汁10g（凤球唛）\n" +
+                    "浓缩鸡汁5g（家乐）\n" +
+                    "400—500ml水\n" +
+                    "生抽15—25g（李锦记）\n" +
+                    "老抽5克（李锦记）");
+            return message;
+        }else if(content.equals("每日一句") || content.equals("一句")) {
+            message.setContent(dailyWord());
             return message;
         }
         message.setContent("未知命令,查看帮助请输入ls或list或列表");
@@ -116,6 +132,17 @@ public class AuthController {
         JSONArray array = jsonObject.getJSONArray("data");
         JSONObject object = array.getJSONObject(0);
         return object.getStr("content");
+    }
+
+    private String dailyWord(){
+        String url = "https://www.mxnzp.com/api/daily_word/recommend?count=1&app_id=nnjn1jimprknskfr&app_secret=a2VqRE1OTlVqcXNieCtycUtsdWJ5dz09";
+        ResponseEntity<String> forEntity = restTemplate.getForEntity(url, String.class);
+        JSONObject jsonObject = JSONUtil.parseObj(forEntity.getBody());
+        if (jsonObject.getInt("code") == 1) {
+            String str = jsonObject.getJSONArray("data").getJSONObject(0).getStr("content");
+            return str;
+        }
+        return "获取失败";
     }
 
 }
