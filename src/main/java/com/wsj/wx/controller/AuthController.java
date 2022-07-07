@@ -121,7 +121,7 @@ public class AuthController {
             return "获取失败，此用户已失效 请重新获取";
         }else{
             String code = map.get(feishuId);
-            return code + "\t\t"+body.getOrDefault("data","获取密码失败 " + body.get("message")).toString();
+            return code + "\n\n\n\n"+body.getOrDefault("data","获取密码失败 " + body.get("message")).toString();
         }
     }
 
